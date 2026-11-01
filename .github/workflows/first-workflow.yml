@@ -6,8 +6,12 @@ on:
 jobs:
   hello:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Print message
+      - name: Print welcome message
         run: echo "Hello! GitHub Actions is working."
-Github Actions is working."
+
+      - name: Show current date
+        run: date
+
+      - name: Show current directory
+        run: pwd
