@@ -1,4 +1,4 @@
-name: My First GitHub Actions
+name: Build and Test Automation
 
 on:
   push:
@@ -6,14 +6,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print welcome message
-        run: echo "Hello! GitHub Actions is working."
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Show current date
-        run: date
+      - name: Make scripts executable
+        run: chmod +x app.sh test.sh
 
-      - name: Show current directory
-        run: pwd
+      - name: Run Build
+        run: ./app.sh
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Make test script executable
+        run: chmod +x test.sh
+
+      - name: Run Test
+        run: ./test.sh
