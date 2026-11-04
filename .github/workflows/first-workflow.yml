@@ -17,7 +17,8 @@ jobs:
 
       - name: Run Build
         run: ./app.sh
-       - name: Check demo secret safely
+
+      - name: Check demo secret safely
         env:
           DEMO_MESSAGE: ${{ secrets.DEMO_MESSAGE }}
         run: |
@@ -45,3 +46,4 @@ jobs:
 
       - name: Run Test
         run: ./test.sh
+
