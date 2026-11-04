@@ -17,6 +17,21 @@ jobs:
 
       - name: Run Build
         run: ./app.sh
+       - name: Check demo secret safely
+        env:
+          DEMO_MESSAGE: ${{ secrets.DEMO_MESSAGE }}
+        run: |
+          if [ -n "$DEMO_MESSAGE" ]; then
+            echo "Demo secret is available"
+          else
+            echo "Demo secret is missing"
+            exit 1
+          fi
+      - name: Check environment variable
+        env:
+          APP_ENV: learning
+        run: |
+          echo "Application environment: $APP_ENV"
 
   test:
     runs-on: ubuntu-latest
